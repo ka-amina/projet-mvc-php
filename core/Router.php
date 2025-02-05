@@ -29,6 +29,7 @@ class Router extends controller
 
     public function dispatch()
     {
+
         $uri = strtok($_SERVER['REQUEST_URI'], '?');
         $method =  $_SERVER['REQUEST_METHOD'];
         if (array_key_exists($uri, $this->routes[$method])) {
@@ -37,6 +38,9 @@ class Router extends controller
 
             $controller = new $controller();
             $controller->$action();
-        } 
+        } else {
+            $this->render('404');
+            
+        }
     }
 }
